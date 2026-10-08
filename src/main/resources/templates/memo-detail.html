@@ -18,6 +18,9 @@
         <div class="note-card note-card-large">
             <div class="note-card-header">
                 <h2 class="note-card-title" th:text="${memo.title}">タイトル</h2>
+				<span th:if="${memo.priority.name() == 'HIGH'}" class="note-badge high">高</span>
+				<span th:if="${memo.priority.name() == 'MEDIUM'}" class="note-badge medium">中</span>
+				<span th:if="${memo.priority.name() == 'LOW'}" class="note-badge low">低</span>
             </div>
             <div class="note-card-content">
                 <p class="note-card-text" th:text="${memo.content}">本文</p>
