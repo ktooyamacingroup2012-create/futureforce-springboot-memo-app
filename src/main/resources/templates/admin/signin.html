@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+    <meta charset="UTF-8">
+    <title>管理者ログイン</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <div class="container">
+            <h1 class="form-title">管理者ログイン</h1>
+
+            <div class="note-form-card">
+                <form th:action="@{/admin/signin}" method="post">
+                    <p th:if="${successMessage}" th:text="${successMessage}"
+                       style="padding: 1rem 1.5rem 0; color: var(--color-primary-dark);"></p>
+                    <p class="error-message" th:if="${param.error}"
+                       style="padding: 1rem 1.5rem 0;">メールアドレスまたはパスワードが違います。</p>
+                    <p th:if="${param.logout}"
+                       style="padding: 1rem 1.5rem 0; color: var(--color-text-light);">ログアウトしました。</p>
+
+                    <div class="form-group">
+                        <label for="email">メールアドレス</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">パスワード</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+
+                    <div class="form-button-container">
+                        <a th:href="@{/admin/signup}" class="btn btn-outline">
+                            <i class="ri-user-add-line"></i>登録画面へ
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="ri-login-box-line"></i>ログイン
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

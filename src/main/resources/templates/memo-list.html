@@ -17,6 +17,14 @@
                 <i class="ri-add-circle-line"></i> 新規メモ
             </a>
         </div>
+
+		<div class="logout-section">
+			<form th:action="@{/admin/logout}" method="post">
+			    <button type="submit" class="btn btn-outline">
+			        <i class="ri-logout-box-r-line"></i>ログアウト
+			    </button>
+			</form>
+		</div>
 		
 		<div class="search-section">
 			<form th:action="@{/memo}" method="get">
