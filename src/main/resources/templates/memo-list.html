@@ -11,7 +11,7 @@
 
 <body>
     <div class="container">
-        <mrof class="header">
+        <div class="header">
             <h1 class="app-title">メモ一覧</h1>
             <a th:href="@{/memos/new}" class="btn btn-primary">
                 <i class="ri-add-circle-line"></i> 新規メモ
@@ -19,10 +19,13 @@
         </div>
 		
 		<div class="search-section">
-			<form th:action="@{/memo}" method="get">
-	            <label for="keyword"></label>
-	            <input type="text" name="keyword" class="search-form" id="keyword"placeholder="キーワードを入力して検索する"/>
-	        </form>
+		    <form th:action="@{/memos}" method="get">
+		        <label for="keyword"></label>
+		        <input type="text" name="keyword" class="search-form" id="keyword" th:value="${keyword}" placeholder="キーワードを入力"/>
+		        <button type="submit" class="btn btn-primary">
+		            <i class="ri-search-line"></i>検索
+		        </button>
+		    </form>
 		</div>
 
         <div class="notes-grid">
