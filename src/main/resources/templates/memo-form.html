@@ -14,11 +14,11 @@
     <div class="container">
         <div class="header">
             <h1 class="app-title" th:text="${memo.id} != null ? 'メモ編集' : 'メモ作成'"></h1>
-            <a th:href="${memo.id} != null ? @{|/memo/detail/${memo.id}|}  : @{/memo}" class="btn btn-outline"><i class="ri-arrow-left-line"></i> 戻る</a>
+            <a th:href="${memo.id} != null ? @{|/memos/detail/${memo.id}|}  : @{/memos}" class="btn btn-outline"><i class="ri-arrow-left-line"></i> 戻る</a>
         </div>
 
         <div class="note-form-card">
-            <form th:action="${memo.id} != null ? @{|/memo/update/${memo.id}|} : @{/memo/create}" th:object="${memo}" method="post">        
+            <form th:action="${memo.id} != null ? @{|/memos/update/${memo.id}|} : @{/memos/create}" th:object="${memo}" method="post">        
                 <div class="form-group">
                     <label for="title">タイトル：</label>
                     <input type="text" th:field="*{title}" id="title">
@@ -27,20 +27,16 @@
 				<div class="form-group">
 				    <p>優先度：<span class="required">必須</span></p>
 					<div class="priority-group">
-				        <label class="priority-pill high" for="priority-high">
-				            <input type="radio" id="priority-high" class="priority-radio" th:field="*{priority}" value="HIGH">高
-				        </label>
-				        <label class="priority-pill medium" for="priority-medium">
-				            <input type="radio" id="priority-medium" class="priority-radio" th:field="*{priority}" value="MEDIUM">中
-				        </label>
-				        <label class="priority-pill low" for="priority-low">
-				            <input type="radio" id="priority-low" class="priority-radio" th:field="*{priority}" value="LOW">低
-				        </label>
-				    </div>
+					    <label th:each="p : ${priorities}"
+					           th:class="|priority-pill ${#strings.toLowerCase(p.name())}|">
+					        <input type="radio" class="priority-radio" th:field="*{priority}" th:value="${p}">
+					        <span th:text="${p.label}">高</span>
+					    </label>
+					</div>
 				    <div th:if="${#fields.hasErrors('priority')}" th:errors="*{priority}" class="error-message"></div>
 				</div>
                 <div class="form-group">
-                    <label for="content">内容：</labelfor="title">
+                    <label for="content">内容：</label>
                     <textarea th:field="*{content}" id="content"></textarea>
                     <div th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="error-message"></div>
                 </div>

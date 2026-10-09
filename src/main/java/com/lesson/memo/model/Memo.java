@@ -28,7 +28,7 @@ public class Memo {
     @Column(nullable = false, length = 100)
     private String title;
     
-    @NotNull
+    @NotNull(message = "優先度を選択してください")
     @Enumerated(EnumType.STRING)
     private Priority priority;
 

@@ -13,14 +13,12 @@
     <div class="container">
         <div class="header">
             <h1 class="app-title">メモ詳細</h1>
-            <a th:href="@{/memo}" class="btn btn-outline"><i class="ri-arrow-left-line"></i> 戻る</a>
+            <a th:href="@{/memos}" class="btn btn-outline"><i class="ri-arrow-left-line"></i> 戻る</a>
         </div>
         <div class="note-card note-card-large">
             <div class="note-card-header">
                 <h2 class="note-card-title" th:text="${memo.title}">タイトル</h2>
-				<span th:if="${memo.priority.name() == 'HIGH'}" class="note-badge high">高</span>
-				<span th:if="${memo.priority.name() == 'MEDIUM'}" class="note-badge medium">中</span>
-				<span th:if="${memo.priority.name() == 'LOW'}" class="note-badge low">低</span>
+				<span th:class="|note-badge ${#strings.toLowerCase(memo.priority.name())}|" th:text="${memo.priority.label}">高</span>
             </div>
             <div class="note-card-content">
                 <p class="note-card-text" th:text="${memo.content}">本文</p>
@@ -29,8 +27,8 @@
             <div class="note-card-footer detail-footer">
                 <p class="note-date" th:text="${#temporals.format(memo.createdAt, 'yyyy/MM/dd HH:mm')}">作成日時</p>
                 <div class="note-actions">
-                    <a th:href="@{|/memo/edit/${memo.id}|}" class="btn btn-primary">編集</a>
-                    <a th:href="@{|/memo/delete/${memo.id}|}" class="btn btn-danger">
+                    <a th:href="@{|/memos/edit/${memo.id}|}" class="btn btn-primary">編集</a>
+                    <a th:href="@{|/memos/delete/${memo.id}|}" class="btn btn-danger">
                         削除
                     </a>
                 </div>

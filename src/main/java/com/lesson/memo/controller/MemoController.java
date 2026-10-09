@@ -25,7 +25,7 @@ import com.lesson.memo.model.Priority;
 import com.lesson.memo.repository.MemoRepository;
 
 @Controller
-@RequestMapping("/memo")
+@RequestMapping("/memos")
 public class MemoController {
 
     @Autowired
@@ -48,20 +48,21 @@ public class MemoController {
     @GetMapping("/new")
     public String showForm(Model model) {
         model.addAttribute("memo", new Memo());
+        model.addAttribute("priorities", Priority.values());
         return "memo-form";
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute @Valid Memo memo,
-            BindingResult result) {
+    public String create(Model model, @ModelAttribute @Valid Memo memo, BindingResult result) {
         if (result.hasErrors()) {
+        	model.addAttribute("priorities", Priority.values());
             return "memo-form";
         }
 
         memo.setCreatedAt(LocalDateTime.now());
         memo.setUpdatedAt(LocalDateTime.now());
         memoRepository.save(memo);
-        return "redirect:/memo";
+        return "redirect:/memos";
     }
 
     @GetMapping("/detail/{id}")
@@ -80,6 +81,7 @@ public class MemoController {
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model, HttpServletResponse response) {
         if (model.containsAttribute("memo")) {
+        	model.addAttribute("priorities", Priority.values());
             return "memo-form";
         }
 
@@ -113,7 +115,7 @@ public class MemoController {
         if (result.hasErrors()) {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.memo", result);
             redirectAttributes.addFlashAttribute("memo", memo);
-            return "redirect:/memo/edit/" + id; // editにリダイレクト
+            return "redirect:/memos/edit/" + id; // editにリダイレクト
         }
 
         memoToUpdate.setTitle(memo.getTitle());
@@ -122,7 +124,7 @@ public class MemoController {
         memoToUpdate.setUpdatedAt(LocalDateTime.now());
         memoRepository.save(memoToUpdate);
 
-        return "redirect:/memo/detail/" + id;
+        return "redirect:/memos/detail/" + id;
     }
 
     @GetMapping("/delete/{id}")
@@ -135,6 +137,6 @@ public class MemoController {
             return "not-found";
         }
 
-        return "redirect:/memo";
+        return "redirect:/memos";
     }
 }
