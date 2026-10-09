@@ -22,9 +22,7 @@
             <div class="note-card" th:each="memo : ${memos}">
                 <div class="note-card-header">
                     <h3 class="note-card-title" th:text="${memo.title}">タイトル</h3>
-					<span th:if="${memo.priority.name() == 'HIGH'}" class="note-badge high">高</span>
-					<span th:if="${memo.priority.name() == 'MEDIUM'}" class="note-badge medium">中</span>
-					<span th:if="${memo.priority.name() == 'LOW'}" class="note-badge low">低</span>
+					<span th:class="|note-badge ${#strings.toLowerCase(memo.priority.name())}| "th:text="${memo.priority.label}">高</span>
                 </div>
                 <div class="note-card-content">
                     <p class="note-card-text" th:text="${memo.content}">内容</p>

@@ -40,13 +40,14 @@ public class MemoController {
     @GetMapping("/new")
     public String showForm(Model model) {
         model.addAttribute("memo", new Memo());
+        model.addAttribute("priorities", Priority.values());
         return "memo-form";
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute @Valid Memo memo,
-            BindingResult result) {
+    public String create(Model model, @ModelAttribute @Valid Memo memo, BindingResult result) {
         if (result.hasErrors()) {
+        	model.addAttribute("priorities", Priority.values());
             return "memo-form";
         }
 
