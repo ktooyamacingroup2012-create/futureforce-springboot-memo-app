@@ -296,6 +296,20 @@ body {
   border-bottom: none;
 }
 
+.logout-section {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+.logout-section form {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}
+
 .search-section form {
     display: flex;
     justify-content: flex-end;
