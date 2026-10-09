@@ -296,6 +296,20 @@ body {
   border-bottom: none;
 }
 
+.search-section form {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-form {
+    width: 35%;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+	margin-right: 15px;
+}
+
 label {
   display: block;
   margin-bottom: 0.5rem;

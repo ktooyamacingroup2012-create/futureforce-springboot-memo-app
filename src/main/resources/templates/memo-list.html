@@ -11,12 +11,19 @@
 
 <body>
     <div class="container">
-        <div class="header">
+        <mrof class="header">
             <h1 class="app-title">メモ一覧</h1>
             <a th:href="@{/memo/new}" class="btn btn-primary">
                 <i class="ri-add-circle-line"></i> 新規メモ
             </a>
         </div>
+		
+		<div class="search-section">
+			<form th:action="@{/memo}" method="get">
+	            <label for="keyword"></label>
+	            <input type="text" name="keyword" class="search-form" id="keyword"placeholder="キーワードを入力して検索する"/>
+	        </form>
+		</div>
 
         <div class="notes-grid">
             <div class="note-card" th:each="memo : ${memos}">
