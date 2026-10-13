@@ -27,7 +27,7 @@ public class SecurityConfig {
                 .loginPage("/admin/signin")
                 .loginProcessingUrl("/admin/signin")
                 .usernameParameter("email")
-                .defaultSuccessUrl("/memos", true)
+                .defaultSuccessUrl("/memo", true)
                 .failureUrl("/admin/signin?error")
                 .permitAll()
             )
